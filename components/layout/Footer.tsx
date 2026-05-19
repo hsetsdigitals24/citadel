@@ -107,9 +107,23 @@ export async function Footer() {
 
       <div className="relative border-t border-white/10">
         <div className="container-tight flex flex-col-reverse gap-4 py-6 sm:flex-row sm:items-center sm:justify-between">
-          <p className="text-xs text-white/60">
-            © {new Date().getFullYear()} Citadel Global Dental Clinic & Braces Centre. All rights reserved.
-          </p>
+          <div className="flex flex-col gap-1 text-xs text-white/60 sm:flex-row sm:items-center sm:gap-3">
+            <p>
+              © {new Date().getFullYear()} Citadel Global Dental Clinic & Braces Centre. All rights reserved.
+            </p>
+            <span className="hidden sm:inline text-white/30" aria-hidden>·</span>
+            <p>
+              Designed & developed by{" "}
+              <a
+                href="https://h-sets.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-medium text-white/80 underline-offset-2 transition hover:text-white hover:underline"
+              >
+                H-Sets Digital Solutions
+              </a>
+            </p>
+          </div>
           <div className="flex items-center gap-3 text-white/60">
             <a href={settings.facebookUrl || "#"} target="_blank" rel="noopener" aria-label="Facebook" className="hover:text-white">
               <svg className="h-4 w-4" viewBox="0 0 24 24" fill="currentColor"><path d="M22 12a10 10 0 1 0-11.6 9.9v-7h-2v-2.9h2v-2.2c0-2 1.2-3.1 3-3.1.9 0 1.8.2 1.8.2v2h-1c-1 0-1.3.6-1.3 1.2v1.9h2.3l-.4 2.9h-1.9v7A10 10 0 0 0 22 12z"/></svg>
