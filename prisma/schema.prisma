@@ -1,0 +1,84 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Appointment {
+  id            String    @id @default(cuid())
+  fullName      String
+  phone         String
+  email         String
+  preferredDate DateTime?
+  preferredTime String?
+  reason        String
+  contactMethod String
+  status        String    @default("pending")
+  createdAt     DateTime  @default(now())
+}
+
+model BlogPost {
+  id          String    @id @default(cuid())
+  title       String
+  slug        String    @unique
+  excerpt     String
+  content     String
+  coverImage  String?
+  category    String?
+  published   Boolean   @default(false)
+  publishedAt DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model Service {
+  id          String   @id @default(cuid())
+  name        String
+  slug        String   @unique
+  description String
+  benefits    String[]
+  steps       Json
+  image       String?
+  order       Int      @default(0)
+  published   Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model TeamMember {
+  id             String  @id @default(cuid())
+  name           String
+  qualifications String
+  specialization String
+  experience     String
+  bio            String
+  photo          String?
+  order          Int     @default(0)
+}
+
+model Testimonial {
+  id          String   @id @default(cuid())
+  patientName String
+  quote       String
+  rating      Int?
+  published   Boolean  @default(false)
+  createdAt   DateTime @default(now())
+}
+
+model Admin {
+  id       String @id @default(cuid())
+  email    String @unique
+  password String
+  role     String @default("editor")
+}
+
+model SiteSettings {
+  id           String @id @default("singleton")
+  workingHours String @default("8:00 AM – 4:00 PM daily")
+  facebookUrl  String @default("")
+  instagramUrl String @default("")
+  address      String @default("221 Ibrahim Taiwo Street, Ilorin")
+}
