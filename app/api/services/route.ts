@@ -6,8 +6,10 @@ import { prisma } from "@/lib/db";
 import { slugify } from "@/lib/utils";
 
 export async function GET() {
+  const session = await getServerSession(authOptions);
   try {
     const items = await prisma.service.findMany({
+      where: session ? {} : { published: true },
       orderBy: [{ order: "asc" }, { name: "asc" }],
     });
     return NextResponse.json(items);

@@ -3,9 +3,10 @@ import Link from "next/link";
 import { buildMeta } from "@/lib/metadata";
 import { PageHero } from "@/components/ui/PageHero";
 import { Reveal } from "@/components/ui/Reveal";
-import { getBlogPosts } from "@/lib/queries";
+import { getBlogPosts, getBlogCategories } from "@/lib/queries";
 import { resolveImageUrl } from "@/lib/r2";
 import { formatDate } from "@/lib/utils";
+import { BlogFilters } from "@/components/blog/BlogFilters";
 
 export const metadata = buildMeta(
   "Blog",
@@ -18,11 +19,14 @@ export default async function BlogPage({
   searchParams: { q?: string; category?: string; page?: string };
 }) {
   const page = Number(searchParams.page ?? 1);
-  const { items, total, pageSize } = await getBlogPosts({
-    q: searchParams.q,
-    category: searchParams.category,
-    page,
-  });
+  const [{ items, total, pageSize }, categories] = await Promise.all([
+    getBlogPosts({
+      q: searchParams.q,
+      category: searchParams.category,
+      page,
+    }),
+    getBlogCategories(),
+  ]);
   const totalPages = Math.max(1, Math.ceil(total / pageSize));
 
   const itemsWithCovers = await Promise.all(
@@ -42,20 +46,11 @@ export default async function BlogPage({
 
       <section className="section">
         <div className="container-tight">
-          <form className="mb-10 flex flex-col sm:flex-row gap-3">
-            <input
-              name="q"
-              defaultValue={searchParams.q ?? ""}
-              placeholder="Search posts…"
-              className="w-full rounded-full border border-brand-100 bg-white px-5 py-3 text-sm focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-500/20"
-            />
-            <button
-              type="submit"
-              className="rounded-full bg-brand-600 px-6 py-3 text-sm font-semibold text-white hover:bg-brand-700"
-            >
-              Search
-            </button>
-          </form>
+          <BlogFilters
+            categories={categories}
+            initialQuery={searchParams.q ?? ""}
+            initialCategory={searchParams.category ?? ""}
+          />
 
           {items.length === 0 ? (
             <div className="rounded-2xl bg-surface p-12 text-center ring-1 ring-black/[0.04]">

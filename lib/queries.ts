@@ -95,6 +95,20 @@ export async function getTestimonials() {
   );
 }
 
+export async function getBlogCategories(): Promise<string[]> {
+  return safe(async () => {
+    const rows = await prisma.blogPost.findMany({
+      where: { published: true, category: { not: null } },
+      select: { category: true },
+      distinct: ["category"],
+      orderBy: { category: "asc" },
+    });
+    return rows
+      .map((r) => r.category)
+      .filter((c): c is string => !!c && c.length > 0);
+  }, []);
+}
+
 export async function getBlogPosts(params: {
   q?: string;
   category?: string;
