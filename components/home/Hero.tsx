@@ -15,7 +15,7 @@ export function Hero() {
   return (
     <section className="relative overflow-hidden bg-cover bg-center bg-no-repeat" style={{ backgroundImage: "url('/images/hero-dentist.jpg')" }}>
       {/* Background */}
-      <div className="absolute inset-0 -z-100 bg-black/40" />
+      <div className="absolute inset-0 -z-100 bg-black/50" />
       <div
         className="absolute inset-0 -z-100 opacity-[0.1]"
         style={{
