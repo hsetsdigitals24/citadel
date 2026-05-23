@@ -15,7 +15,7 @@ export function WhatsAppButton() {
       transition={{ delay: 0.6, type: "spring", stiffness: 260, damping: 20 }}
       whileHover={{ scale: 1.06 }}
       whileTap={{ scale: 0.95 }}
-      className="fixed bottom-5 right-5 z-50 inline-flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-glow ring-4 ring-[#25D366]/20"
+      className="hidden md:inline-flex fixed bottom-5 right-5 z-50 h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-glow ring-4 ring-[#25D366]/20"
     >
       <span className="absolute inset-0 -z-10 animate-pulse-ring rounded-full bg-[#25D366]/60" />
       <svg viewBox="0 0 24 24" className="h-7 w-7" fill="currentColor" aria-hidden>

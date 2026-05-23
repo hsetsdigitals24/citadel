@@ -1,24 +1,37 @@
+import Image from "next/image";
 import { cn } from "@/lib/utils";
 
-export function Logo({ className }: { className?: string }) {
+type LogoProps = {
+  className?: string;
+  /**
+   * When true, renders a white silhouette suitable for dark backgrounds
+   * (uses CSS filter to invert the color logo).
+   */
+  variant?: "default" | "light";
+  priority?: boolean;
+};
+
+export function Logo({ className, variant = "default", priority }: LogoProps) {
   return (
     <span
       className={cn(
-        "relative inline-flex items-center justify-center rounded-xl bg-brand-gradient shadow-soft",
+        "relative inline-block align-middle",
+        // Default ratio matches the wordmark PNG; can be overridden via className.
+        "h-10 w-[110px]",
         className
       )}
     >
-      <svg
-        viewBox="0 0 32 32"
-        fill="none"
-        className="h-1/2 w-1/2 text-white"
-        aria-hidden
-      >
-        <path
-          d="M11 8c-2.5 0-4.5 2-4.5 4.5 0 2.5.6 4.6 1.9 7.6.7 1.6 1.3 3.4 2.6 3.4 1.1 0 1.4-1.6 2-3.1.4-1.1 1-1.9 2-1.9s1.6.8 2 1.9c.6 1.5.9 3.1 2 3.1 1.3 0 1.9-1.8 2.6-3.4 1.3-3 1.9-5.1 1.9-7.6C23.5 10 21.5 8 19 8c-1.3 0-2 .6-3 .6S12.3 8 11 8z"
-          fill="currentColor"
-        />
-      </svg>
+      <Image
+        src="/logo.png"
+        alt="Citadel Global Dental Clinic & Braces Centre"
+        fill
+        priority={priority}
+        sizes="200px"
+        className={cn(
+          "object-contain",
+          variant === "light" && "brightness-0 invert"
+        )}
+      />
     </span>
   );
 }

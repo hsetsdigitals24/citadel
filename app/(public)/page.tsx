@@ -1,7 +1,9 @@
 import { Hero } from "@/components/home/Hero";
+import { TrustStrip } from "@/components/home/TrustStrip";
 import { ServicesHighlight } from "@/components/home/ServicesHighlight";
 import { WhyChooseUs } from "@/components/home/WhyChooseUs";
 import { TeamPreview } from "@/components/home/TeamPreview";
+import { ClinicGallery } from "@/components/home/ClinicGallery";
 import { TestimonialsCarousel } from "@/components/home/TestimonialsCarousel";
 import { CTABanner } from "@/components/home/CTABanner";
 import { JsonLd } from "@/components/home/JsonLd";
@@ -32,9 +34,11 @@ export default async function HomePage() {
     <>
       <JsonLd />
       <Hero />
+      <TrustStrip />
       <ServicesHighlight services={services as any} />
       <WhyChooseUs />
       <TeamPreview member={lead as any} />
+      <ClinicGallery />
       <TestimonialsCarousel testimonials={testimonials as any} />
       <CTABanner />
     </>

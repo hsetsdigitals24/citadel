@@ -10,12 +10,12 @@ export function CTABanner() {
     <section className="px-4 sm:px-6 lg:px-8 pb-24">
       <div className="container-tight">
         <div className="relative overflow-hidden rounded-3xl bg-brand-gradient px-8 py-14 sm:px-14 sm:py-20 text-white">
-          <motion.div
+          {/* <motion.div
             aria-hidden
             className="absolute -right-20 -top-20 h-80 w-80 rounded-full bg-clinic-red/30 blur-3xl"
             animate={{ scale: [1, 1.1, 1] }}
             transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
-          />
+          /> */}
           <motion.div
             aria-hidden
             className="absolute -left-20 -bottom-20 h-72 w-72 rounded-full bg-white/10 blur-3xl"

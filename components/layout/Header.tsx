@@ -38,21 +38,24 @@ export function Header() {
       className={cn(
         "sticky top-0 z-30 w-full transition-all duration-300",
         scrolled
-          ? "bg-white/85 backdrop-blur-md shadow-soft"
+          ? "bg-white/90 backdrop-blur-md shadow-soft border-b border-brand-100/60"
           : "bg-white/60 backdrop-blur-sm"
       )}
     >
-      <div className="container-tight flex h-16 items-center justify-between sm:h-20">
-        <Link href="/" className="flex items-center gap-2.5 group">
-          <Logo className="h-9 w-9" />
-          <span className="hidden sm:flex flex-col leading-tight">
-            <span className="text-[15px] font-semibold tracking-tight text-brand-700">
-              Citadel Global
-            </span>
-            <span className="text-[11px] uppercase tracking-[0.18em] text-ink-subtle">
-              Dental Clinic
-            </span>
-          </span>
+      <div
+        className={cn(
+          "container-tight flex items-center justify-between transition-all duration-300",
+          scrolled ? "h-14 sm:h-16" : "h-16 sm:h-20"
+        )}
+      >
+        <Link href="/" className="flex items-center group" aria-label="Citadel Global Dental Clinic — Home">
+          <Logo
+            priority
+            className={cn(
+              "transition-all duration-300",
+              scrolled ? "h-9 w-[120px] sm:h-10 sm:w-[135px]" : "h-11 w-[150px] sm:h-12 sm:w-[165px]"
+            )}
+          />
         </Link>
 
         <nav className="hidden md:flex items-center gap-1">

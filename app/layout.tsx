@@ -6,6 +6,7 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { EmergencyBanner } from "@/components/layout/EmergencyBanner";
 import { WhatsAppButton } from "@/components/shared/WhatsAppButton";
+import { MobileStickyBar } from "@/components/shared/MobileStickyBar";
 import { SITE } from "@/lib/utils";
 
 export const metadata: Metadata = {
@@ -44,12 +45,13 @@ export default function RootLayout({
           href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
         />
       </head>
-      <body className="min-h-screen bg-background text-foreground antialiased">
+      <body className="min-h-screen bg-background text-foreground antialiased pb-[68px] md:pb-0">
         <EmergencyBanner />
         <Header />
         <main className="pt-0">{children}</main>
         <Footer />
         <WhatsAppButton />
+        <MobileStickyBar />
 
         {gaId ? (
           <>
