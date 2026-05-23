@@ -18,6 +18,7 @@ const cols = [
       { href: "/team", label: "Our team" },
       { href: "/testimonials", label: "Testimonials" },
       { href: "/blog", label: "Blog" },
+      { href: "/admin", label: "Management" },
     ],
   },
   {
