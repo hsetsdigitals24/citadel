@@ -1,14 +1,13 @@
 "use client";
 
-import Image from "next/image";
+// import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import {
   ShieldCheckIcon,
   SparklesIcon,
   PhoneIcon,
-  CheckBadgeIcon,
-  StarIcon,
+  CheckBadgeIcon
 } from "@heroicons/react/24/solid";
 import { SITE } from "@/lib/utils";
 
