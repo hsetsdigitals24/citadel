@@ -8,7 +8,6 @@ type Settings = {
   workingHours: string;
   facebookUrl: string;
   instagramUrl: string;
-  address: string;
 };
 
 const fieldCls =
@@ -50,14 +49,6 @@ export function SettingsForm({ initial }: { initial: Settings }) {
   return (
     <div className="card p-6 sm:p-8 space-y-6">
       <div className="grid gap-5 sm:grid-cols-2">
-        <label className="block sm:col-span-2">
-          <span className="text-sm font-medium">Address</span>
-          <input
-            value={v.address}
-            onChange={(e) => set("address", e.target.value)}
-            className={`${fieldCls} mt-1.5`}
-          />
-        </label>
         <label className="block sm:col-span-2">
           <span className="text-sm font-medium">Working hours</span>
           <input

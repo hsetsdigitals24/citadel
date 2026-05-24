@@ -18,23 +18,15 @@ export function ImageUpload({ value, onChange, prefix }: Props) {
     setError(null);
     setUploading(true);
     try {
-      const key = `${prefix}/${crypto.randomUUID()}-${file.name.replace(/\s+/g, "-")}`;
-      const res = await fetch("/api/upload", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ key, contentType: file.type }),
-      });
+      const form = new FormData();
+      form.append("file", file);
+      form.append("prefix", prefix);
+      const res = await fetch("/api/upload", { method: "POST", body: form });
       if (!res.ok) {
         const j = await res.json().catch(() => ({}));
-        throw new Error(j.error || "Upload failed");
+        throw new Error(j.error || `Upload failed (${res.status})`);
       }
-      const { url } = await res.json();
-      const put = await fetch(url, {
-        method: "PUT",
-        headers: { "Content-Type": file.type },
-        body: file,
-      });
-      if (!put.ok) throw new Error("Upload to storage failed");
+      const { key } = await res.json();
       onChange(key);
     } catch (e: any) {
       setError(e.message);

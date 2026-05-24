@@ -6,10 +6,10 @@ import { prisma } from "@/lib/db";
 import { slugify } from "@/lib/utils";
 
 const updateSchema = z.object({
-  title: z.string().min(2).max(200).optional(),
+  title: z.string().max(200).optional(),
   slug: z.string().optional(),
-  excerpt: z.string().min(2).max(400).optional(),
-  content: z.string().min(2).optional(),
+  excerpt: z.string().max(400).optional(),
+  content: z.string().optional(),
   category: z.string().optional().nullable(),
   coverImage: z.string().optional().nullable(),
   published: z.boolean().optional(),
@@ -39,13 +39,17 @@ export async function PUT(
   const body = await req.json().catch(() => null);
   const parsed = updateSchema.safeParse(body);
   if (!parsed.success) {
-    return NextResponse.json({ error: "Invalid input" }, { status: 400 });
+    return NextResponse.json(
+      { error: "Invalid input", fields: parsed.error.flatten().fieldErrors },
+      { status: 400 }
+    );
   }
 
   const existing = await prisma.blogPost.findUnique({ where: { id: params.id } });
   if (!existing) return NextResponse.json({ error: "Not found" }, { status: 404 });
 
   const data = parsed.data;
+
   let slug = existing.slug;
   if (data.slug && data.slug !== existing.slug) {
     slug = await uniqueSlug(slugify(data.slug), params.id);

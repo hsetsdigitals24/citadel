@@ -29,10 +29,10 @@ export async function GET(req: NextRequest) {
 }
 
 const createSchema = z.object({
-  title: z.string().min(2).max(200),
+  title: z.string().max(200).optional().default(""),
   slug: z.string().optional(),
-  excerpt: z.string().min(2).max(400),
-  content: z.string().min(2),
+  excerpt: z.string().max(400).optional().default(""),
+  content: z.string().optional().default(""),
   category: z.string().optional().nullable(),
   coverImage: z.string().optional().nullable(),
   published: z.boolean().optional(),
@@ -46,7 +46,10 @@ export async function POST(req: NextRequest) {
   const body = await req.json().catch(() => null);
   const parsed = createSchema.safeParse(body);
   if (!parsed.success) {
-    return NextResponse.json({ error: "Invalid input" }, { status: 400 });
+    return NextResponse.json(
+      { error: "Invalid input", fields: parsed.error.flatten().fieldErrors },
+      { status: 400 }
+    );
   }
   const data = parsed.data;
   const baseSlug = (data.slug && data.slug.length ? data.slug : slugify(data.title)) || "untitled";

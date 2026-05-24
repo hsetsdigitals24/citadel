@@ -1,6 +1,6 @@
 import Link from "next/link";
-import { PlusIcon } from "@heroicons/react/24/outline";
 import { prisma } from "@/lib/db";
+import { ImportDefaultsButton } from "@/components/admin/ImportDefaultsButton";
 
 async function getServices() {
   try {
@@ -16,20 +16,11 @@ export default async function AdminServicesPage() {
   const services = await getServices();
   return (
     <div className="space-y-6">
-      <header className="flex items-center justify-between gap-4">
-        <div>
-          <h1 className="heading-md">Services</h1>
-          <p className="mt-1 text-sm text-ink-muted">
-            Manage service pages, ordering and publishing.
-          </p>
-        </div>
-        <Link
-          href="/admin/services/new"
-          className="inline-flex items-center gap-2 rounded-full bg-brand-600 px-4 py-2 text-sm font-semibold text-white shadow-soft hover:bg-brand-700"
-        >
-          <PlusIcon className="h-4 w-4" />
-          New service
-        </Link>
+      <header>
+        <h1 className="heading-md">Services</h1>
+        <p className="mt-1 text-sm text-ink-muted">
+          Manage service pages, ordering and publishing.
+        </p>
       </header>
 
       <div className="card overflow-x-auto">
@@ -46,14 +37,8 @@ export default async function AdminServicesPage() {
             {services.length === 0 && (
               <tr>
                 <td colSpan={4} className="px-4 py-10 text-center text-ink-muted">
-                  No services yet —{" "}
-                  <Link
-                    href="/admin/services/new"
-                    className="text-brand-700 underline"
-                  >
-                    add the first one
-                  </Link>
-                  .
+                  <div>No services yet.</div>
+                  <ImportDefaultsButton />
                 </td>
               </tr>
             )}

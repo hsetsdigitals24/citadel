@@ -8,7 +8,7 @@ import { buildMeta } from "@/lib/metadata";
 import { PageHero } from "@/components/ui/PageHero";
 import { Reveal } from "@/components/ui/Reveal";
 import { ContactForm } from "@/components/forms/ContactForm";
-import { SITE } from "@/lib/utils";
+import { SITE, LOCATIONS } from "@/lib/utils";
 import { getSettings } from "@/lib/queries";
 
 export const metadata = buildMeta(
@@ -18,7 +18,6 @@ export const metadata = buildMeta(
 
 export default async function ContactPage() {
   const settings = await getSettings();
-  const mapQuery = encodeURIComponent(settings.address);
   return (
     <>
       <PageHero
@@ -30,9 +29,15 @@ export default async function ContactPage() {
       <section className="section">
         <div className="container-tight grid gap-10 lg:grid-cols-2">
           <div className="space-y-5">
-            <Reveal>
-              <InfoRow icon={MapPinIcon} title="Visit us" body={settings.address} />
-            </Reveal>
+            {LOCATIONS.map((loc, i) => (
+              <Reveal key={loc.id} delay={i * 0.03}>
+                <InfoRow
+                  icon={MapPinIcon}
+                  title={loc.name}
+                  body={loc.address}
+                />
+              </Reveal>
+            ))}
             <Reveal delay={0.05}>
               <InfoRow
                 icon={PhoneIcon}
@@ -96,17 +101,22 @@ export default async function ContactPage() {
               </Reveal>
             )}
 
-            <Reveal delay={0.2}>
-              <div className="overflow-hidden rounded-2xl ring-1 ring-black/[0.04] shadow-soft">
-                <iframe
-                  title="Citadel Global Dental Clinic location"
-                  className="h-72 w-full"
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                  src={`https://www.google.com/maps?q=${mapQuery}&output=embed`}
-                />
-              </div>
-            </Reveal>
+            {LOCATIONS.map((loc, i) => (
+              <Reveal key={loc.id} delay={0.2 + i * 0.05}>
+                <div className="overflow-hidden rounded-2xl ring-1 ring-black/[0.04] shadow-soft">
+                  <div className="bg-white px-5 py-3 text-sm font-semibold text-foreground">
+                    {loc.name}
+                  </div>
+                  <iframe
+                    title={`${loc.name} location`}
+                    className="h-64 w-full"
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    src={`https://www.google.com/maps?q=${encodeURIComponent(loc.address)}&output=embed`}
+                  />
+                </div>
+              </Reveal>
+            ))}
           </div>
 
           <Reveal delay={0.05}>

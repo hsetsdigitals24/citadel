@@ -41,8 +41,10 @@ function shell(title: string, body: string) {
       <div style="background:#fff;padding:28px;border-radius:0 0 16px 16px;box-shadow:0 8px 24px -12px rgba(11,27,51,0.12)">
         ${body}
       </div>
-      <div style="text-align:center;color:#8A97AB;font-size:12px;margin-top:16px">
-        221 Ibrahim Taiwo Street, Ilorin · 08131539685
+      <div style="text-align:center;color:#8A97AB;font-size:12px;margin-top:16px;line-height:1.6">
+        Citadel Global Dental Clinic — 221 Ibrahim Taiwo Road, Ilorin<br/>
+        Adewole Specialist Dental Clinic — 25 Okoerin Street, Ilorin<br/>
+        08131539685
       </div>
     </div>
   </body></html>`;

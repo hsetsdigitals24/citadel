@@ -30,7 +30,6 @@ export default async function AdminSettingsPage() {
             workingHours: s.workingHours,
             facebookUrl: s.facebookUrl,
             instagramUrl: s.instagramUrl,
-            address: s.address,
           }}
         />
       ) : (

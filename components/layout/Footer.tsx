@@ -6,7 +6,7 @@ import {
   ClockIcon,
 } from "@heroicons/react/24/outline";
 import { Logo } from "@/components/shared/Logo";
-import { SITE } from "@/lib/utils";
+import { SITE, LOCATIONS } from "@/lib/utils";
 import { getSettings } from "@/lib/queries";
 
 const cols = [
@@ -60,10 +60,15 @@ export async function Footer() {
             World-class dentistry delivered with warmth — home to the {SITE.brand} in Ilorin, Kwara State.
           </p>
           <div className="space-y-3 text-sm">
-            <div className="flex items-start gap-3 text-white/80">
-              <MapPinIcon className="h-4 w-4 mt-0.5 shrink-0" />
-              <span>{settings.address}</span>
-            </div>
+            {LOCATIONS.map((loc) => (
+              <div key={loc.id} className="flex items-start gap-3 text-white/80">
+                <MapPinIcon className="h-4 w-4 mt-0.5 shrink-0" />
+                <span>
+                  <span className="block font-medium text-white">{loc.name}</span>
+                  <span className="block text-white/70">{loc.address}</span>
+                </span>
+              </div>
+            ))}
             <a
               href={`tel:${SITE.phone1}`}
               className="flex items-center gap-3 text-white/80 hover:text-white"

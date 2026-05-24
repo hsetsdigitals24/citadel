@@ -8,7 +8,6 @@ const schema = z.object({
   workingHours: z.string().min(1).max(200),
   facebookUrl: z.string().max(300).default(""),
   instagramUrl: z.string().max(300).default(""),
-  address: z.string().min(1).max(400),
 });
 
 export async function GET() {

@@ -10,7 +10,6 @@ export type Settings = {
   workingHours: string;
   facebookUrl: string;
   instagramUrl: string;
-  address: string;
 };
 
 async function safe<T>(fn: () => Promise<T>, fallback: T): Promise<T> {
@@ -25,7 +24,6 @@ const defaultSettings: Settings = {
   workingHours: SITE.hours,
   facebookUrl: SITE.facebookUrl,
   instagramUrl: SITE.instagramUrl,
-  address: SITE.addressShort,
 };
 
 export async function getSettings(): Promise<Settings> {
@@ -38,7 +36,6 @@ export async function getSettings(): Promise<Settings> {
       workingHours: row.workingHours || defaultSettings.workingHours,
       facebookUrl: row.facebookUrl || defaultSettings.facebookUrl,
       instagramUrl: row.instagramUrl || defaultSettings.instagramUrl,
-      address: row.address || defaultSettings.address,
     };
   }, defaultSettings);
 }

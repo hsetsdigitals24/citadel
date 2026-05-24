@@ -69,7 +69,18 @@ export function BlogEditor({ initial }: { initial?: Post }) {
       });
       if (!res.ok) {
         const j = await res.json().catch(() => ({}));
-        throw new Error(j.error || "Save failed");
+        const fields = j.fields as Record<string, string[] | undefined> | undefined;
+        const fieldMsgs = fields
+          ? Object.entries(fields)
+              .filter(([, msgs]) => msgs && msgs.length)
+              .map(
+                ([name, msgs]) =>
+                  `${name.charAt(0).toUpperCase() + name.slice(1)}: ${msgs!.join(", ")}`
+              )
+              .join(" • ")
+          : "";
+        const msg = [j.error, fieldMsgs].filter(Boolean).join(" — ") || "Save failed";
+        throw new Error(msg);
       }
       const saved = await res.json();
       if (isNew) {
@@ -129,7 +140,7 @@ export function BlogEditor({ initial }: { initial?: Post }) {
             disabled={saving}
             className="rounded-full bg-white px-4 py-2 text-sm font-medium text-brand-700 ring-1 ring-brand-200 hover:bg-brand-50 disabled:opacity-60"
           >
-            {saving ? "Saving…" : "Save draft"}
+            {saving ? "Saving…" : post.published ? "Unpublish" : "Save draft"}
           </button>
           <button
             type="button"

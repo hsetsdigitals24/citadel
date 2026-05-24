@@ -14,15 +14,22 @@ export const r2 = new S3Client({
   },
 });
 
-export async function getUploadUrl(key: string, contentType: string) {
-  return getSignedUrl(
-    r2,
+// SigV4 hard-caps presigned URLs at 7 days. For "permanent" image links,
+// configure R2_PUBLIC_URL and use resolveImageUrl() below.
+const MAX_SIGNED_TTL = 60 * 60 * 24 * 7;
+
+export async function putObject(
+  key: string,
+  body: Buffer | Uint8Array,
+  contentType: string
+) {
+  await r2.send(
     new PutObjectCommand({
       Bucket: process.env.R2_BUCKET_NAME,
       Key: key,
+      Body: body,
       ContentType: contentType,
-    }),
-    { expiresIn: 300 }
+    })
   );
 }
 
@@ -33,31 +40,30 @@ export async function getFileUrl(key: string) {
       Bucket: process.env.R2_BUCKET_NAME,
       Key: key,
     }),
-    { expiresIn: 3600 }
+    { expiresIn: MAX_SIGNED_TTL }
   );
 }
 
-// Resolves a stored R2 object key into a renderable URL.
-// - If the value already looks like a full URL, return as-is.
-// - If R2_PUBLIC_URL is set (public bucket), prefer that — no signing round-trip.
-// - Otherwise generate a short-lived signed GET URL.
-// Returns null when R2 isn't configured at all.
+export async function getObject(key: string) {
+  return r2.send(
+    new GetObjectCommand({
+      Bucket: process.env.R2_BUCKET_NAME,
+      Key: key,
+    })
+  );
+}
+
+
+// Resolves a stored R2 object key into a renderable URL via our /api/image proxy.
 export async function resolveImageUrl(
   key: string | null | undefined
 ): Promise<string | null> {
   if (!key) return null;
   if (/^https?:\/\//i.test(key)) return key;
 
-  const publicBase = process.env.R2_PUBLIC_URL;
-  if (publicBase) {
-    return `${publicBase.replace(/\/$/, "")}/${key.replace(/^\//, "")}`;
-  }
-
-  if (!process.env.R2_ACCOUNT_ID || !process.env.R2_ACCESS_KEY_ID) return null;
-
-  try {
-    return await getFileUrl(key);
-  } catch {
-    return null;
-  }
+  // Always route through our own /api/image proxy. Same-origin URL avoids
+  // next/image's upstream fetch (which can hit DNS/IPv6 issues in dev or
+  // require remotePatterns config), and works whether the bucket is public
+  // or not. R2_PUBLIC_URL is kept in env for future direct-CDN serving.
+  return `/api/image/${key.replace(/^\//, "")}`;
 }

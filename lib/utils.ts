@@ -33,9 +33,6 @@ export const SITE = {
   whatsappMessage:
     "Hello%2C%20I%20found%20you%20on%20your%20website%20and%20I%27d%20like%20to%20book%20an%20appointment.",
   email: "citadelglobaldentalclinic@gmail.com",
-  address:
-    "221 Ibrahim Taiwo Street, Opp. Agbo-oba Junction, Besides Chupet Stores, Ilorin, Kwara State, Nigeria",
-  addressShort: "221 Ibrahim Taiwo Street, Ilorin",
   hours: "8:00 AM – 4:00 PM daily",
   facebookUrl: "#",
   instagramUrl: "#",
@@ -43,3 +40,27 @@ export const SITE = {
 } as const;
 
 export const whatsappLink = `https://wa.me/${SITE.whatsappNumber}?text=${SITE.whatsappMessage}`;
+
+export type ClinicLocation = {
+  id: string;
+  name: string;
+  address: string;
+  addressShort: string;
+};
+
+export const LOCATIONS: readonly ClinicLocation[] = [
+  {
+    id: "citadel-ilorin",
+    name: "Citadel Global Dental Clinic and Braces Centre",
+    address:
+      "221 Ibrahim Taiwo Road, Opposite Agbo-oba Junction, Besides Chupet Stores, Ilorin, Kwara State, Nigeria",
+    addressShort: "221 Ibrahim Taiwo Road, Ilorin",
+  },
+  {
+    id: "adewole-ilorin",
+    name: "Adewole Specialist Dental Clinic",
+    address:
+      "25 Okoerin Street, Opposite Laurel Street, Off Taiwo, Ilorin, Kwara State, Nigeria",
+    addressShort: "25 Okoerin Street, Ilorin",
+  },
+] as const;
