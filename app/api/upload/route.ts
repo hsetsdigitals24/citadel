@@ -55,7 +55,7 @@ export async function POST(req: NextRequest) {
   }
   if (!ALLOWED_PREFIXES.has(prefix)) {
     return NextResponse.json(
-      { error: `Invalid 'prefix' — must be one of ${[...ALLOWED_PREFIXES].join(", ")}` },
+      { error: `Invalid 'prefix' — must be one of ${Array.from(ALLOWED_PREFIXES).join(", ")}` },
       { status: 400 }
     );
   }
