@@ -16,15 +16,7 @@ export function Hero() {
     <section className="relative overflow-hidden bg-cover bg-center bg-no-repeat" style={{ backgroundImage: "url('/images/hero-dentist.jpg')" }}>
       {/* Background */}
       <div className="absolute inset-0 -z-100 bg-black/50" />
-      <div
-        className="absolute inset-0 -z-100 opacity-[0.1]"
-        style={{
-          backgroundImage:
-            "linear-gradient(rgba(255,255,255,.6) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.6) 1px, transparent 1px)",
-          backgroundSize: "44px 44px",
-        }}
-        aria-hidden
-      />
+     
       <motion.div
         aria-hidden
         className="absolute -top-40 -right-40 -z-10 h-[520px] w-[520px] rounded-full bg-clinic-red/25 blur-3xl"
