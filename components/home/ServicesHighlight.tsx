@@ -22,8 +22,8 @@ type Service = {
 
 const accents = [
   { Icon: SparklesIcon, image: "/images/service-braces.jpg", tint: "from-brand-600/80 to-brand-900/80" },
-  { Icon: FaceSmileIcon, image: "/images/service-whitening.jpg", tint: "from-clinic-red/80 to-brand-900/80" },
-  { Icon: BeakerIcon, image: "/images/service-implants.jpg", tint: "from-brand-500/80 to-brand-800/80" },
+  { Icon: FaceSmileIcon, image: "/images/service-implants.jpg", tint: "from-clinic-red/80 to-brand-900/80" },
+  { Icon: BeakerIcon, image: "/images/service-whitening.jpg", tint: "from-brand-500/80 to-brand-800/80" },
   { Icon: ShieldCheckIcon, image: "/images/service-cleaning.jpg", tint: "from-brand-700/80 to-brand-900/80" },
 ];
 
