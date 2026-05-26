@@ -48,7 +48,7 @@ export function Hero() {
             {/* Headline — patient outcome focused */}
             <h1 className="heading-xl mt-6 text-white text-balance">
               Get the smile{" "}
-              <span className="text-[#238af5]">you deserve</span>
+              <span className="text-[#599fe7]">you deserve</span>
               {" "}— from Ilorin&apos;s most certified dental team.
             </h1>
 
