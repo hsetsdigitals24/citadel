@@ -2,6 +2,7 @@ import { buildMeta } from "@/lib/metadata";
 import { PageHero } from "@/components/ui/PageHero";
 import { Reveal } from "@/components/ui/Reveal";
 import { CTABanner } from "@/components/home/CTABanner";
+import { BreadcrumbJsonLd } from "@/components/seo/StructuredData";
 import {
   CheckBadgeIcon,
   HandRaisedIcon,
@@ -10,7 +11,8 @@ import {
 
 export const metadata = buildMeta(
   "About Us",
-  "Founded in 2020 in Ilorin, Citadel Global Dental Clinic delivers world-class dentistry led by Dr. Chris Ejakpome — BDS, certified Implantologist (USA & Canada)."
+  "Founded in 2020 in Ilorin, Citadel Global Dental Clinic delivers world-class dentistry led by Dr. Chris Ejakpome — BDS, certified Implantologist (USA & Canada).",
+  { path: "/about" }
 );
 
 const values = [
@@ -34,6 +36,12 @@ const values = [
 export default function AboutPage() {
   return (
     <>
+      <BreadcrumbJsonLd
+        items={[
+          { name: "Home", path: "/" },
+          { name: "About", path: "/about" },
+        ]}
+      />
       <PageHero
         eyebrow="About the clinic"
         title="A clinic founded on global standards and local warmth."

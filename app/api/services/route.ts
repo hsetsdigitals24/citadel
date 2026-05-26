@@ -23,12 +23,18 @@ const stepSchema = z.object({
   detail: z.string().min(1),
 });
 
+const faqSchema = z.object({
+  question: z.string().min(1),
+  answer: z.string().min(1),
+});
+
 const createSchema = z.object({
   name: z.string().min(2).max(120),
   slug: z.string().optional(),
   description: z.string().min(2).max(2000),
   benefits: z.array(z.string()).default([]),
   steps: z.array(stepSchema).default([]),
+  faqs: z.array(faqSchema).default([]),
   image: z.string().optional().nullable(),
   order: z.number().int().optional(),
   published: z.boolean().optional(),
@@ -56,6 +62,7 @@ export async function POST(req: NextRequest) {
       description: data.description,
       benefits: data.benefits,
       steps: data.steps,
+      faqs: data.faqs,
       image: data.image ?? null,
       order: data.order ?? 0,
       published: data.published ?? true,

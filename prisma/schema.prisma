@@ -41,6 +41,7 @@ model Service {
   description String
   benefits    String[]
   steps       Json
+  faqs        Json     @default("[]")
   image       String?
   order       Int      @default(0)
   published   Boolean  @default(true)

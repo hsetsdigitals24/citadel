@@ -10,16 +10,24 @@ import { Reveal } from "@/components/ui/Reveal";
 import { ContactForm } from "@/components/forms/ContactForm";
 import { SITE, LOCATIONS } from "@/lib/utils";
 import { getSettings } from "@/lib/queries";
+import { BreadcrumbJsonLd } from "@/components/seo/StructuredData";
 
 export const metadata = buildMeta(
   "Contact Us",
-  "Get in touch with Citadel Global Dental Clinic in Ilorin — phone, WhatsApp, email and map."
+  "Get in touch with Citadel Global Dental Clinic in Ilorin — phone, WhatsApp, email and map.",
+  { path: "/contact" }
 );
 
 export default async function ContactPage() {
   const settings = await getSettings();
   return (
     <>
+      <BreadcrumbJsonLd
+        items={[
+          { name: "Home", path: "/" },
+          { name: "Contact", path: "/contact" },
+        ]}
+      />
       <PageHero
         eyebrow="Contact"
         title="We’d love to hear from you."

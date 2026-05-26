@@ -6,7 +6,11 @@ import { buildMeta } from "@/lib/metadata";
 import { PageHero } from "@/components/ui/PageHero";
 import { CTABanner } from "@/components/home/CTABanner";
 import { resolveImageUrl } from "@/lib/r2";
-import { formatDate } from "@/lib/utils";
+import { formatDate, SITE } from "@/lib/utils";
+import {
+  ArticleJsonLd,
+  BreadcrumbJsonLd,
+} from "@/components/seo/StructuredData";
 
 async function getPost(slug: string) {
   try {
@@ -24,13 +28,26 @@ export async function generateMetadata({
   params: { slug: string };
 }): Promise<Metadata> {
   const p = await getPost(params.slug);
-  if (!p) return buildMeta("Blog post", "Read the latest from Citadel Global Dental Clinic.");
-  const cover = await resolveImageUrl(p.coverImage);
-  const meta = buildMeta(p.title, p.excerpt.slice(0, 155));
-  if (cover && meta.openGraph) {
-    meta.openGraph.images = [{ url: cover }];
+  if (!p) {
+    return buildMeta(
+      "Blog post",
+      "Read the latest from Citadel Global Dental Clinic.",
+      { path: `/blog/${params.slug}`, robots: { index: false, follow: true } }
+    );
   }
-  return meta;
+  const cover = await resolveImageUrl(p.coverImage);
+  return buildMeta(p.title, p.excerpt.slice(0, 155), {
+    path: `/blog/${p.slug}`,
+    image: cover ?? undefined,
+    type: "article",
+    publishedTime: p.publishedAt
+      ? new Date(p.publishedAt).toISOString()
+      : undefined,
+    modifiedTime: p.updatedAt
+      ? new Date(p.updatedAt).toISOString()
+      : undefined,
+    keywords: p.category ? [p.category, `${p.category} Ilorin`] : undefined,
+  });
 }
 
 export default async function BlogPostPage({
@@ -42,9 +59,30 @@ export default async function BlogPostPage({
   if (!post) notFound();
 
   const coverUrl = await resolveImageUrl(post.coverImage);
+  const articleUrl = `${SITE.url.replace(/\/$/, "")}/blog/${post.slug}`;
 
   return (
     <>
+      <BreadcrumbJsonLd
+        items={[
+          { name: "Home", path: "/" },
+          { name: "Blog", path: "/blog" },
+          { name: post.title, path: `/blog/${post.slug}` },
+        ]}
+      />
+      <ArticleJsonLd
+        title={post.title}
+        description={post.excerpt}
+        url={articleUrl}
+        image={coverUrl}
+        datePublished={
+          post.publishedAt ? new Date(post.publishedAt).toISOString() : undefined
+        }
+        dateModified={
+          post.updatedAt ? new Date(post.updatedAt).toISOString() : undefined
+        }
+        category={post.category}
+      />
       <PageHero
         eyebrow={post.category ?? "Blog"}
         title={post.title}

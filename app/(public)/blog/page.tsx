@@ -7,10 +7,12 @@ import { getBlogPosts, getBlogCategories } from "@/lib/queries";
 import { resolveImageUrl } from "@/lib/r2";
 import { formatDate } from "@/lib/utils";
 import { BlogFilters } from "@/components/blog/BlogFilters";
+import { BreadcrumbJsonLd } from "@/components/seo/StructuredData";
 
 export const metadata = buildMeta(
   "Blog",
-  "Dental health tips, treatment guides and clinic news from Citadel Global Dental Clinic in Ilorin."
+  "Dental health tips, treatment guides and clinic news from Citadel Global Dental Clinic in Ilorin.",
+  { path: "/blog" }
 );
 
 export default async function BlogPage({
@@ -38,6 +40,12 @@ export default async function BlogPage({
 
   return (
     <>
+      <BreadcrumbJsonLd
+        items={[
+          { name: "Home", path: "/" },
+          { name: "Blog", path: "/blog" },
+        ]}
+      />
       <PageHero
         eyebrow="Blog"
         title="Notes on dental health & care."

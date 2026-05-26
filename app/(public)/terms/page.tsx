@@ -2,7 +2,11 @@ import { buildMeta } from "@/lib/metadata";
 import { PageHero } from "@/components/ui/PageHero";
 import { LegalBody } from "@/components/shared/LegalBody";
 
-export const metadata = buildMeta("Terms & Conditions", "Terms governing the use of the Citadel Global Dental Clinic website.");
+export const metadata = buildMeta(
+  "Terms & Conditions",
+  "Terms governing the use of the Citadel Global Dental Clinic website.",
+  { path: "/terms" }
+);
 
 export default function TermsPage() {
   return (

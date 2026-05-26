@@ -9,8 +9,14 @@ import { CTABanner } from "@/components/home/CTABanner";
 import { getService } from "@/lib/queries";
 import { resolveImageUrl } from "@/lib/r2";
 import { buildMeta } from "@/lib/metadata";
+import {
+  BreadcrumbJsonLd,
+  FAQJsonLd,
+  ServiceJsonLd,
+} from "@/components/seo/StructuredData";
 
 type Step = { title: string; detail: string };
+type Faq = { question: string; answer: string };
 
 export async function generateMetadata({
   params,
@@ -18,8 +24,19 @@ export async function generateMetadata({
   params: { slug: string };
 }): Promise<Metadata> {
   const s = await getService(params.slug);
-  if (!s) return buildMeta("Service", "Dental service at Citadel Global Dental Clinic.");
-  return buildMeta(s.name, s.description.slice(0, 155));
+  if (!s) {
+    return buildMeta(
+      "Service",
+      "Dental service at Citadel Global Dental Clinic.",
+      { path: `/services/${params.slug}`, robots: { index: false, follow: true } }
+    );
+  }
+  const image = await resolveImageUrl(s.image);
+  return buildMeta(s.name, s.description.slice(0, 155), {
+    path: `/services/${s.slug}`,
+    image: image ?? undefined,
+    keywords: [`${s.name} Ilorin`, `${s.name} Nigeria`],
+  });
 }
 
 export default async function ServiceDetailPage({
@@ -31,11 +48,26 @@ export default async function ServiceDetailPage({
   if (!s) notFound();
 
   const steps = (Array.isArray(s.steps) ? s.steps : []) as Step[];
+  const faqs = (Array.isArray(s.faqs) ? s.faqs : []) as Faq[];
   const benefits = (s.benefits as string[]) ?? [];
   const imageUrl = await resolveImageUrl(s.image);
 
   return (
     <>
+      <BreadcrumbJsonLd
+        items={[
+          { name: "Home", path: "/" },
+          { name: "Services", path: "/services" },
+          { name: s.name, path: `/services/${s.slug}` },
+        ]}
+      />
+      <ServiceJsonLd
+        name={s.name}
+        description={s.description}
+        slug={s.slug}
+        image={imageUrl}
+      />
+      {faqs.length > 0 && <FAQJsonLd items={faqs} />}
       <PageHero eyebrow="Service" title={s.name} description={s.description} />
 
       <section className="section">
@@ -100,6 +132,36 @@ export default async function ServiceDetailPage({
                       </li>
                     ))}
                   </ol>
+                </div>
+              </Reveal>
+            )}
+
+            {faqs.length > 0 && (
+              <Reveal>
+                <div>
+                  <h2 className="heading-md text-balance">
+                    Frequently asked questions
+                  </h2>
+                  <dl className="mt-6 space-y-3">
+                    {faqs.map((faq) => (
+                      <details
+                        key={faq.question}
+                        className="group rounded-2xl bg-white ring-1 ring-black/[0.04] shadow-soft open:shadow-glow"
+                      >
+                        <summary className="flex cursor-pointer list-none items-center justify-between gap-4 p-5 font-semibold text-foreground [&::-webkit-details-marker]:hidden">
+                          <dt>{faq.question}</dt>
+                          <span className="inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand-50 text-brand-700 transition group-open:rotate-45">
+                            <svg viewBox="0 0 16 16" className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth={2}>
+                              <path d="M8 3v10M3 8h10" strokeLinecap="round" />
+                            </svg>
+                          </span>
+                        </summary>
+                        <dd className="px-5 pb-5 text-sm text-ink-muted leading-relaxed">
+                          {faq.answer}
+                        </dd>
+                      </details>
+                    ))}
+                  </dl>
                 </div>
               </Reveal>
             )}

@@ -5,10 +5,12 @@ import { Reveal } from "@/components/ui/Reveal";
 import { CTABanner } from "@/components/home/CTABanner";
 import { getTeam } from "@/lib/queries";
 import { resolveImageUrl } from "@/lib/r2";
+import { BreadcrumbJsonLd, PersonJsonLd } from "@/components/seo/StructuredData";
 
 export const metadata = buildMeta(
   "Our Team",
-  "Meet the dental team behind Citadel Global Dental Clinic, led by Dr. Chris Ejakpome — BDS, Implantology (USA & Canada)."
+  "Meet the dental team behind Citadel Global Dental Clinic, led by Dr. Chris Ejakpome — BDS, Implantology (USA & Canada).",
+  { path: "/team" }
 );
 
 export default async function TeamPage() {
@@ -22,6 +24,20 @@ export default async function TeamPage() {
 
   return (
     <>
+      <BreadcrumbJsonLd
+        items={[
+          { name: "Home", path: "/" },
+          { name: "Team", path: "/team" },
+        ]}
+      />
+      {members.map((m, i) => (
+        <PersonJsonLd
+          key={m.id}
+          member={m}
+          photoUrl={m.photoUrl}
+          isPrimary={i === 0}
+        />
+      ))}
       <PageHero
         eyebrow="Our team"
         title="Globally certified. Personally dedicated."

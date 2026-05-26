@@ -118,6 +118,67 @@ export function StepList({
   );
 }
 
+export type FaqValue = { question: string; answer: string };
+
+export function FaqList({
+  values,
+  onChange,
+}: {
+  values: FaqValue[];
+  onChange: (next: FaqValue[]) => void;
+}) {
+  const update = (i: number, patch: Partial<FaqValue>) => {
+    const next = values.slice();
+    next[i] = { ...next[i], ...patch };
+    onChange(next);
+  };
+  const move = (i: number, dir: -1 | 1) => {
+    const j = i + dir;
+    if (j < 0 || j >= values.length) return;
+    const next = values.slice();
+    [next[i], next[j]] = [next[j], next[i]];
+    onChange(next);
+  };
+  const remove = (i: number) =>
+    onChange(values.filter((_, k) => k !== i));
+
+  return (
+    <div className="space-y-3">
+      {values.map((faq, i) => (
+        <div
+          key={i}
+          className="rounded-xl border border-brand-100 bg-white p-3 space-y-2"
+        >
+          <div className="flex items-start gap-2">
+            <input
+              value={faq.question}
+              onChange={(e) => update(i, { question: e.target.value })}
+              placeholder="Question (e.g. Is the treatment painful?)"
+              className={fieldCls}
+            />
+            <RowActions i={i} length={values.length} onMove={move} onRemove={remove} />
+          </div>
+          <textarea
+            rows={2}
+            value={faq.answer}
+            onChange={(e) => update(i, { answer: e.target.value })}
+            placeholder="Answer…"
+            className={fieldCls}
+          />
+        </div>
+      ))}
+      <button
+        type="button"
+        onClick={() => onChange([...values, { question: "", answer: "" }])}
+        className="inline-flex items-center gap-2 rounded-full border border-brand-200 bg-white px-3 py-1.5 text-xs font-medium text-brand-700 hover:bg-brand-50"
+      >
+        <PlusIcon className="h-3.5 w-3.5" />
+        Add FAQ
+      </button>
+    </div>
+  );
+}
+
 function RowActions({
   i,
   length,

@@ -9,15 +9,23 @@ import { PageHero } from "@/components/ui/PageHero";
 import { Reveal } from "@/components/ui/Reveal";
 import { AppointmentForm } from "@/components/forms/AppointmentForm";
 import { SITE, whatsappLink } from "@/lib/utils";
+import { BreadcrumbJsonLd } from "@/components/seo/StructuredData";
 
 export const metadata = buildMeta(
   "Book an Appointment",
-  "Request a dental appointment at Citadel Global Dental Clinic in Ilorin. Open 8am–4pm daily. Emergency line available."
+  "Request a dental appointment at Citadel Global Dental Clinic in Ilorin. Open 8am–4pm daily. Emergency line available.",
+  { path: "/appointments" }
 );
 
 export default function AppointmentsPage() {
   return (
     <>
+      <BreadcrumbJsonLd
+        items={[
+          { name: "Home", path: "/" },
+          { name: "Appointments", path: "/appointments" },
+        ]}
+      />
       <PageHero
         eyebrow="Appointments"
         title="Book a visit in under a minute."

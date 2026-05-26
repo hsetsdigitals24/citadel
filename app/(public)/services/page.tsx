@@ -7,10 +7,12 @@ import { Reveal } from "@/components/ui/Reveal";
 import { CTABanner } from "@/components/home/CTABanner";
 import { getServices } from "@/lib/queries";
 import { resolveImageUrl } from "@/lib/r2";
+import { BreadcrumbJsonLd } from "@/components/seo/StructuredData";
 
 export const metadata = buildMeta(
   "Dental Services",
-  "Braces, implants, teeth whitening, scaling & polishing, and family dentistry in Ilorin — delivered with international standards of care."
+  "Braces, implants, teeth whitening, scaling & polishing, and family dentistry in Ilorin — delivered with international standards of care.",
+  { path: "/services" }
 );
 
 export default async function ServicesPage() {
@@ -24,6 +26,12 @@ export default async function ServicesPage() {
 
   return (
     <>
+      <BreadcrumbJsonLd
+        items={[
+          { name: "Home", path: "/" },
+          { name: "Services", path: "/services" },
+        ]}
+      />
       <PageHero
         eyebrow="Our services"
         title="Comprehensive dental care, under one roof."

@@ -2,7 +2,11 @@ import { buildMeta } from "@/lib/metadata";
 import { PageHero } from "@/components/ui/PageHero";
 import { LegalBody } from "@/components/shared/LegalBody";
 
-export const metadata = buildMeta("Privacy Policy", "How Citadel Global Dental Clinic collects, uses and protects your information.");
+export const metadata = buildMeta(
+  "Privacy Policy",
+  "How Citadel Global Dental Clinic collects, uses and protects your information.",
+  { path: "/privacy-policy" }
+);
 
 export default function PrivacyPolicyPage() {
   return (

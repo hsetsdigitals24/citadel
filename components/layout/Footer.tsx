@@ -126,7 +126,7 @@ export async function Footer() {
                 rel="noopener noreferrer"
                 className="font-medium text-white/80 underline-offset-2 transition hover:text-white hover:underline"
               >
-                H-Sets Digital Solutions
+                H-SETS
               </a>
             </p>
           </div>

@@ -51,6 +51,7 @@ const config: Config = {
       },
       fontFamily: {
         sans: [
+          "var(--font-inter)",
           "Inter",
           "ui-sans-serif",
           "system-ui",
@@ -62,6 +63,7 @@ const config: Config = {
           "sans-serif",
         ],
         display: [
+          "var(--font-inter)",
           "Inter",
           "ui-sans-serif",
           "system-ui",

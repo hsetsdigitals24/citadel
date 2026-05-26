@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { ArrowLeftIcon, TrashIcon } from "@heroicons/react/24/outline";
 import { ImageUpload } from "./ImageUpload";
-import { StringList, StepList, type StepValue } from "./RepeatableList";
+import { StringList, StepList, FaqList, type StepValue, type FaqValue } from "./RepeatableList";
 import { slugify } from "@/lib/utils";
 
 type Service = {
@@ -15,6 +15,7 @@ type Service = {
   description: string;
   benefits: string[];
   steps: StepValue[];
+  faqs: FaqValue[];
   image: string | null;
   order: number;
   published: boolean;
@@ -26,6 +27,7 @@ const empty: Service = {
   description: "",
   benefits: [""],
   steps: [{ title: "", detail: "" }],
+  faqs: [],
   image: null,
   order: 0,
   published: true,
@@ -63,6 +65,9 @@ export function ServiceEditor({ initial }: { initial?: Service }) {
         steps: s.steps
           .map((st) => ({ title: st.title.trim(), detail: st.detail.trim() }))
           .filter((st) => st.title && st.detail),
+        faqs: s.faqs
+          .map((f) => ({ question: f.question.trim(), answer: f.answer.trim() }))
+          .filter((f) => f.question && f.answer),
         image: s.image,
         order: Number(s.order) || 0,
         published: s.published,
@@ -81,7 +86,7 @@ export function ServiceEditor({ initial }: { initial?: Service }) {
         router.push(`/admin/services/${saved.id}`);
         router.refresh();
       } else {
-        setS((p) => ({ ...p, ...saved, steps: saved.steps ?? p.steps }));
+        setS((p) => ({ ...p, ...saved, steps: saved.steps ?? p.steps, faqs: saved.faqs ?? p.faqs }));
         router.refresh();
       }
     } catch (e: any) {
@@ -177,6 +182,16 @@ export function ServiceEditor({ initial }: { initial?: Service }) {
               Procedure steps
             </h3>
             <StepList values={s.steps} onChange={(v) => set("steps", v)} />
+          </section>
+
+          <section className="space-y-3">
+            <h3 className="text-xs font-semibold uppercase tracking-[0.14em] text-ink-subtle">
+              FAQs
+            </h3>
+            <p className="text-xs text-ink-subtle">
+              These appear as an accordion on the public service page and as FAQPage JSON-LD for Google rich results.
+            </p>
+            <FaqList values={s.faqs} onChange={(v) => set("faqs", v)} />
           </section>
         </div>
 

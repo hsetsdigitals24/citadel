@@ -10,12 +10,18 @@ const stepSchema = z.object({
   detail: z.string().min(1),
 });
 
+const faqSchema = z.object({
+  question: z.string().min(1),
+  answer: z.string().min(1),
+});
+
 const updateSchema = z.object({
   name: z.string().min(2).max(120).optional(),
   slug: z.string().optional(),
   description: z.string().min(2).max(2000).optional(),
   benefits: z.array(z.string()).optional(),
   steps: z.array(stepSchema).optional(),
+  faqs: z.array(faqSchema).optional(),
   image: z.string().optional().nullable(),
   order: z.number().int().optional(),
   published: z.boolean().optional(),
@@ -64,6 +70,7 @@ export async function PUT(
       ...(data.description !== undefined ? { description: data.description } : {}),
       ...(data.benefits !== undefined ? { benefits: data.benefits } : {}),
       ...(data.steps !== undefined ? { steps: data.steps } : {}),
+      ...(data.faqs !== undefined ? { faqs: data.faqs } : {}),
       ...(data.image !== undefined ? { image: data.image } : {}),
       ...(data.order !== undefined ? { order: data.order } : {}),
       ...(data.published !== undefined ? { published: data.published } : {}),

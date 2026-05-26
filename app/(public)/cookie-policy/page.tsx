@@ -2,7 +2,11 @@ import { buildMeta } from "@/lib/metadata";
 import { PageHero } from "@/components/ui/PageHero";
 import { LegalBody } from "@/components/shared/LegalBody";
 
-export const metadata = buildMeta("Cookie Policy", "How Citadel Global Dental Clinic uses cookies on this website.");
+export const metadata = buildMeta(
+  "Cookie Policy",
+  "How Citadel Global Dental Clinic uses cookies on this website.",
+  { path: "/cookie-policy" }
+);
 
 export default function CookiePolicyPage() {
   return (

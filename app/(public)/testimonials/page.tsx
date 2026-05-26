@@ -7,7 +7,8 @@ import { getTestimonials } from "@/lib/queries";
 
 export const metadata = buildMeta(
   "Testimonials",
-  "What patients are saying about Citadel Global Dental Clinic & Best Braces Centre in Ilorin."
+  "What patients are saying about Citadel Global Dental Clinic & Best Braces Centre in Ilorin.",
+  { path: "/testimonials" }
 );
 
 export default async function TestimonialsPage() {
