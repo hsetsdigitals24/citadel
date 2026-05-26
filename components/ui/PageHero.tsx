@@ -10,23 +10,16 @@ type Props = {
 
 export function PageHero({ eyebrow, title, description }: Props) {
   return (
-    <section className="relative overflow-hidden bg-brand-gradient text-white">
-      <div
-        className="absolute inset-0 opacity-[0.08]"
-        aria-hidden
-        style={{
-          backgroundImage:
-            "linear-gradient(rgba(255,255,255,.6) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.6) 1px, transparent 1px)",
-          backgroundSize: "44px 44px",
-        }}
-      />
-      <motion.div
+    <section className="relative overflow-hidden bg-brand-gradient text-white bg-cover bg-bottom" style={{ backgroundImage: "url('/images/about-hero.png')" }}>
+      <div className="absolute inset-0 bg-gradient-to-r from-black/65 via-black/50 to-black/30" aria-hidden />
+
+      {/* <motion.div
         aria-hidden
         className="absolute -top-32 -right-20 h-[380px] w-[380px] rounded-full bg-clinic-red/25 blur-3xl"
         animate={{ scale: [1, 1.06, 1] }}
         transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-      />
-      <div className="container-tight relative py-20 sm:py-24 lg:py-28">
+      /> */}
+      <div className="container-tight relative z-10 py-20 sm:py-24 lg:py-28">
         <motion.div
           initial={{ opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
@@ -46,7 +39,7 @@ export function PageHero({ eyebrow, title, description }: Props) {
           )}
         </motion.div>
       </div>
-      <svg viewBox="0 0 1440 60" className="block w-full text-background" aria-hidden preserveAspectRatio="none">
+      <svg viewBox="0 0 1440 60" className="relative z-10 block w-full text-background" aria-hidden preserveAspectRatio="none">
         <path fill="currentColor" d="M0,30 C320,60 720,0 1440,30 L1440,60 L0,60 Z" />
       </svg>
     </section>
