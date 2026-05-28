@@ -33,7 +33,7 @@ export const SITE = {
   whatsappMessage:
     "Hello%2C%20I%20found%20you%20on%20your%20website%20and%20I%27d%20like%20to%20book%20an%20appointment.",
   email: "citadelglobaldentalclinic@gmail.com",
-  hours: "8:00 AM – 4:00 PM daily",
+  hours: "Open 24 hours, 7 days a week",
   facebookUrl: "#",
   instagramUrl: "#",
   url: "https://citadelglobaldental.com",

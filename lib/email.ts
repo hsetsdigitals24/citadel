@@ -83,7 +83,7 @@ export async function sendAppointmentConfirmation(a: AppointmentData) {
     "We received your request",
     `<p style="margin:0 0 12px">Hi ${a.fullName.split(" ")[0]},</p>
      <p style="margin:0 0 12px;color:#5B6B82">Thank you for reaching out to Citadel Global Dental Clinic. We have received your appointment request and our team will be in touch shortly via your preferred contact method (<strong>${a.contactMethod}</strong>).</p>
-     <p style="margin:0 0 12px;color:#5B6B82">Working hours: 8:00 AM – 4:00 PM daily. For emergencies, call <a style="color:#C0392B" href="tel:08131539685">08131539685</a>.</p>
+     <p style="margin:0 0 12px;color:#5B6B82">We are open 24 hours, 7 days a week. For emergencies, call <a style="color:#C0392B" href="tel:08131539685">08131539685</a>.</p>
      <p style="margin:24px 0 0;color:#0B1B33;font-weight:600">— Citadel Global Dental Clinic</p>`
   );
   await transporter.sendMail({

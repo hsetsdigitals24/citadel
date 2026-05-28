@@ -13,7 +13,7 @@ import { BreadcrumbJsonLd } from "@/components/seo/StructuredData";
 
 export const metadata = buildMeta(
   "Book an Appointment",
-  "Request a dental appointment at Citadel Global Dental Clinic in Ilorin. Open 8am–4pm daily. Emergency line available.",
+  "Request a dental appointment at Citadel Global Dental Clinic in Ilorin. Open 24 hours, 7 days a week. Emergency line available.",
   { path: "/appointments" }
 );
 

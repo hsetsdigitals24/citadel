@@ -11,7 +11,7 @@ import { BreadcrumbJsonLd } from "@/components/seo/StructuredData";
 
 export const metadata = buildMeta(
   "Dental Services",
-  "Braces, implants, teeth whitening, scaling & polishing, and family dentistry in Ilorin — delivered with international standards of care.",
+  "Braces, aligners, veneers, implants, cosmetic dental care, teeth whitening, family dentistry, grills, and more — in Ilorin, delivered with international standards of care.",
   { path: "/services" }
 );
 

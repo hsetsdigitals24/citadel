@@ -18,8 +18,8 @@ export async function JsonLd() {
       "Saturday",
       "Sunday",
     ],
-    opens: "08:00",
-    closes: "16:00",
+    opens: "00:00",
+    closes: "23:59",
   };
 
   const businesses = LOCATIONS.map((loc) => {
@@ -38,7 +38,7 @@ export async function JsonLd() {
         addressRegion: "Kwara State",
         addressCountry: "NG",
       },
-      openingHours: "Mo-Su 08:00-16:00",
+      openingHours: "Mo-Su 00:00-23:59",
       openingHoursSpecification: [opens],
       ...(sameAs.length ? { sameAs } : {}),
       medicalSpecialty: [

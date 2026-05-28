@@ -9,6 +9,11 @@ import {
   FaceSmileIcon,
   BeakerIcon,
   ShieldCheckIcon,
+  StarIcon,
+  AdjustmentsHorizontalIcon,
+  PaintBrushIcon,
+  HomeIcon,
+  TrophyIcon,
 } from "@heroicons/react/24/outline";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/ui/Reveal";
@@ -21,14 +26,19 @@ type Service = {
 };
 
 const accents = [
-  { Icon: SparklesIcon, image: "/images/service-braces.jpg", tint: "from-brand-600/80 to-brand-900/80" },
-  { Icon: FaceSmileIcon, image: "/images/service-implants.jpg", tint: "from-clinic-red/80 to-brand-900/80" },
-  { Icon: BeakerIcon, image: "/images/service-whitening.jpg", tint: "from-brand-500/80 to-brand-800/80" },
-  { Icon: ShieldCheckIcon, image: "/images/service-cleaning.jpg", tint: "from-brand-700/80 to-brand-900/80" },
+  { Icon: SparklesIcon,                  image: "/images/service-braces.jpg",    tint: "from-brand-600/80 to-brand-900/80" },
+  { Icon: FaceSmileIcon,                 image: "/images/service-implants.jpg",  tint: "from-clinic-red/80 to-brand-900/80" },
+  { Icon: BeakerIcon,                    image: "/images/service-whitening.jpg", tint: "from-brand-500/80 to-brand-800/80" },
+  { Icon: ShieldCheckIcon,               image: "/images/service-cleaning.jpg",  tint: "from-brand-700/80 to-brand-900/80" },
+  { Icon: StarIcon,                      image: "/images/services-veneers.png",  tint: "from-brand-400/80 to-brand-800/80" },
+  { Icon: AdjustmentsHorizontalIcon,     image: "/images/services-aligners.png", tint: "from-clinic-red/70 to-brand-800/80" },
+  { Icon: PaintBrushIcon,                image: "/images/service-cosmetic.jpg",  tint: "from-brand-500/80 to-clinic-red/70" },
+  { Icon: HomeIcon,                      image: "/images/service-family.jpg",    tint: "from-brand-600/80 to-brand-900/80" },
+  { Icon: TrophyIcon,                    image: "/images/service-grills.jpg",    tint: "from-brand-700/80 to-clinic-red/80" },
 ];
 
 export function ServicesHighlight({ services }: { services: Service[] }) {
-  const shown = services.slice(0, 4);
+  const shown = services.slice(0, 6);
   return (
     <section className="section">
       <div className="container-tight">
@@ -49,7 +59,7 @@ export function ServicesHighlight({ services }: { services: Service[] }) {
           </Reveal>
         </div>
 
-        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {shown.map((s, i) => {
             const a = accents[i % accents.length];
             return (

@@ -30,6 +30,48 @@ const credentials = [
     name: "Nigerian Dental Association",
     issuer: "Federal Republic of Nigeria",
   },
+  {
+    Icon: ShieldCheckIcon,
+    abbr: "WDC",
+    name: "World Dental Council",
+    issuer: "International affiliation",
+  },
+  {
+    Icon: GlobeAltIcon,
+    abbr: "FDI",
+    name: "World Dental Federation",
+    issuer: "International affiliation",
+  },
+  {
+    Icon: AcademicCapIcon,
+    abbr: "ICD",
+    name: "International College of Dentist",
+    issuer: "International affiliation",
+  },
+  {
+    Icon: ShieldCheckIcon,
+    abbr: "HMO",
+    name: "Health Management Organization",
+    issuer: "Nigerian accreditation",
+  },
+  {
+    Icon: ShieldCheckIcon,
+    abbr: "NHIS",
+    name: "National Health Insurance Scheme",
+    issuer: "Federal Government of Nigeria",
+  },
+  {
+    Icon: ShieldCheckIcon,
+    abbr: "FMoH",
+    name: "Federal Ministry of Health",
+    issuer: "Federal Government of Nigeria",
+  },
+  {
+    Icon: ShieldCheckIcon,
+    abbr: "KSMOH",
+    name: "Kwara State Ministry of Health",
+    issuer: "Kwara State Government",
+  },
 ];
 
 export function CertificationsStrip() {

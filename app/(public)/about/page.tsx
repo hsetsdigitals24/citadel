@@ -81,6 +81,13 @@ export default function AboutPage() {
                   "Certification in Implantology — USA",
                   "Certification in Implantology — Canada",
                   "Specialism in Oral & Maxillofacial Surgery",
+                  "Member — World Dental Council (WDC)",
+                  "Member — World Dental Federation (FDI)",
+                  "Fellow — International College of Dentist (ICD)",
+                  "Health Management Organization (HMO) Accredited",
+                  "National Health Insurance Scheme (NHIS) Certified",
+                  "Federal Ministry of Health Registered",
+                  "Kwara State Ministry of Health Certified",
                 ].map((c) => (
                   <li key={c} className="flex items-start gap-3">
                     <span className="mt-1 inline-flex h-5 w-5 items-center justify-center rounded-full bg-brand-600 text-white text-xs">

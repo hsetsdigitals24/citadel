@@ -78,7 +78,7 @@ model Admin {
 
 model SiteSettings {
   id           String @id @default("singleton")
-  workingHours String @default("8:00 AM – 4:00 PM daily")
+  workingHours String @default("Open 24 hours, 7 days a week")
   facebookUrl  String @default("")
   instagramUrl String @default("")
   address      String @default("221 Ibrahim Taiwo Street, Ilorin")

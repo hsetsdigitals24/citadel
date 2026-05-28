@@ -54,7 +54,7 @@ export function SettingsForm({ initial }: { initial: Settings }) {
           <input
             value={v.workingHours}
             onChange={(e) => set("workingHours", e.target.value)}
-            placeholder="8:00 AM – 4:00 PM daily"
+            placeholder="Open 24 hours, 7 days a week"
             className={`${fieldCls} mt-1.5`}
           />
         </label>
